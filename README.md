@@ -1,4 +1,4 @@
-Yugioh Quiz (WIP)
+# Yugioh Quiz (WIP)
 
 ## Getting Started
 

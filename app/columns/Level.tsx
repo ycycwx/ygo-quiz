@@ -1,12 +1,12 @@
 import {useCard, useTargetCard} from '../context';
 
 export const LevelColumn = () => {
-    const {level} = useCard();
-    const {level: targetLevel} = useTargetCard();
+    const {rawLevel} = useCard();
+    const {level: targetRawLevel} = useTargetCard();
     return (
         <div className="flex items-center gap-2">
-            <span className={level === targetLevel ? 'text-green-500' : ''}>{level}</span>
-            {level > targetLevel ? '↓' : level < targetLevel ? '↑' : null}
+            <span className={rawLevel === targetRawLevel ? 'text-green-500' : ''}>{rawLevel}</span>
+            {rawLevel > targetRawLevel ? '↓' : rawLevel < targetRawLevel ? '↑' : null}
         </div>
     );
 };

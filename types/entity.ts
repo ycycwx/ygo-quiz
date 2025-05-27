@@ -18,4 +18,5 @@ export interface Card extends DBCard {
     categoryTypes: string[];
     raceTypes: string[];
     attributeTypes: string[];
+    rawLevel: number;
 }

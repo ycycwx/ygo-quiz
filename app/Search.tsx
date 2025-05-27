@@ -11,7 +11,7 @@ export const Search = ({disabled = [], onSelect}: {disabled?: number[]; onSelect
     const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
     const [inputValue, setInputValue] = useState('');
-    const debouncedInputValue = useDebouncedValue(inputValue, 500);
+    const debouncedInputValue = useDebouncedValue(inputValue, 300);
     const {data} = useSWR<Card[]>(
         debouncedInputValue ? `/api/cards?name=${debouncedInputValue}` : null,
         fetcher,

@@ -60,7 +60,7 @@ export default function Quiz() {
     return (
         <div className="flex flex-col gap-2">
             {process.env.NODE_ENV === 'development' ? <Cheats name={data.name} /> : null}
-            {showAnswer ? null : <Search disabled={items.map(({id}) => id)} onSelect={handleSelect} />}
+            {showAnswer || isSuccess ? null : <Search disabled={items.map(({id}) => id)} onSelect={handleSelect} />}
             <ShowCase target={data} items={items} />
             <div className="flex items-center gap-2">
                 {

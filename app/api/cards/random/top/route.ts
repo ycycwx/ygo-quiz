@@ -1,6 +1,6 @@
 import {NextResponse} from 'next/server';
 import {db} from '@/lib/db';
-import top from '@/db/top.json';
+import top from '@/public/db/top.json';
 import {processData} from '@/lib/processor';
 import type {NextRequest} from 'next/server';
 import type {DBCard} from '@/types/entity';

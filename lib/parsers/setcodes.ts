@@ -1,6 +1,5 @@
 import fs from 'node:fs';
-import {dirname, join} from 'node:path';
-import {fileURLToPath} from 'node:url';
+import {join} from 'node:path';
 
 interface SetnameEntry {
     setcode: number;
@@ -36,7 +35,7 @@ function parseStringsFile(filePath: string): ParsedData {
     return {setnames};
 }
 
-const filePath = join(dirname(fileURLToPath(import.meta.url)), '..', '..', 'db', 'strings.conf');
+const filePath = join(process.cwd(), 'public', 'db', 'strings.conf');
 const parsedData = parseStringsFile(filePath);
 
 export function getSetnamesBySetcode(setcode: number): string[] {

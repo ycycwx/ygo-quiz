@@ -1,7 +1,7 @@
 #/bin/sh
 
 ROOT_DIR=$(git rev-parse --show-toplevel)
-PATH_DIR=$ROOT_DIR/db/
+PATH_DIR=$ROOT_DIR/public/db/
 
 if [ ! -d $PATH_DIR ]; then
     mkdir -p $PATH_DIR

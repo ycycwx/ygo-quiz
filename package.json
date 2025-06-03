@@ -41,7 +41,7 @@
         "lint-staged": "^16.1.0",
         "tailwindcss": "^4.1.8",
         "tsx": "^4.19.4",
-        "tw-animate-css": "^1.3.2",
+        "tw-animate-css": "^1.3.3",
         "typescript": "^5.8.3"
     }
 }

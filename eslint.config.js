@@ -15,6 +15,15 @@ const compat = new FlatCompat({
  */
 const eslintConfig = [
     {
+        ignores: [
+            'node_modules/**',
+            '.next/**',
+            'out/**',
+            'build/**',
+            'next-env.d.ts',
+        ],
+    },
+    {
         plugins: {
             '@stylistic': stylistic,
         },

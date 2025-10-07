@@ -1,5 +1,6 @@
 import {dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {defineConfig} from 'eslint/config';
 import {FlatCompat} from '@eslint/eslintrc';
 import stylistic from '@stylistic/eslint-plugin';
 
@@ -10,10 +11,8 @@ const compat = new FlatCompat({
     baseDirectory: __dirname,
 });
 
-/**
- * @type {import('eslint').Linter.Config[]}
- */
-const eslintConfig = [
+export default defineConfig([
+    ...compat.extends('next/core-web-vitals', 'next/typescript'),
     {
         ignores: [
             'node_modules/**',
@@ -24,6 +23,7 @@ const eslintConfig = [
         ],
     },
     {
+        files: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'],
         plugins: {
             '@stylistic': stylistic,
         },
@@ -66,7 +66,4 @@ const eslintConfig = [
         // ignore shadcn/ui components
         ignores: ['components/ui/**'],
     },
-    ...compat.extends('next/core-web-vitals', 'next/typescript'),
-];
-
-export default eslintConfig;
+]);

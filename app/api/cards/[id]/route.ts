@@ -11,8 +11,8 @@ const stmt = db.prepare<[string], DBCard>(`
     WHERE d.id = ?
 `);
 
-export const GET = async (_: NextRequest, {params}: {params: Promise<{id: string}>}) => {
-    const {id} = await params;
+export const GET = async (_: NextRequest, ctx: RouteContext<'/api/cards/[id]'>) => {
+    const {id} = await ctx.params;
     if (!id.trim()) {
         return NextResponse.json({});
     }

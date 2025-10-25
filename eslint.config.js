@@ -1,18 +1,11 @@
-import {dirname} from 'node:path';
-import {fileURLToPath} from 'node:url';
 import {defineConfig} from 'eslint/config';
-import {FlatCompat} from '@eslint/eslintrc';
+import nextVitals from 'eslint-config-next/core-web-vitals';
+import nextTs from 'eslint-config-next/typescript';
 import stylistic from '@stylistic/eslint-plugin';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-    baseDirectory: __dirname,
-});
-
 export default defineConfig([
-    ...compat.extends('next/core-web-vitals', 'next/typescript'),
+    ...nextVitals,
+    ...nextTs,
     {
         ignores: [
             'node_modules/**',
@@ -20,6 +13,7 @@ export default defineConfig([
             'out/**',
             'build/**',
             'next-env.d.ts',
+            'components/ui/**',
         ],
     },
     {
@@ -63,7 +57,5 @@ export default defineConfig([
             '@stylistic/space-in-parens': ['error', 'never'],
             '@stylistic/comma-dangle': ['error', 'always-multiline'],
         },
-        // ignore shadcn/ui components
-        ignores: ['components/ui/**'],
     },
 ]);

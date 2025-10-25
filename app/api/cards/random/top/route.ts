@@ -2,7 +2,6 @@ import {NextResponse} from 'next/server';
 import {db} from '@/lib/db';
 import top from '@/public/db/top.json';
 import {processData} from '@/lib/processor';
-import type {NextRequest} from 'next/server';
 import type {DBCard} from '@/types/entity';
 
 const stmt = db.prepare<[number], DBCard>(`
@@ -16,9 +15,8 @@ const pickRandom = (cards: number[]) => {
     return cards[Math.floor(Math.random() * cards.length)];
 };
 
-export const GET = async (_: NextRequest, {params}: {params: Promise<{type: 'monster' | 'ex'}>}) => {
-    const type = (await params)?.type ?? 'monster';
-    const items = stmt.all(pickRandom(top[type].map(item => item.id)));
+export const GET = async () => {
+    const items = stmt.all(pickRandom(top.monster.map(item => item.id)));
     if (!items.length) {
         // TODO: throw error?
         return NextResponse.json({});

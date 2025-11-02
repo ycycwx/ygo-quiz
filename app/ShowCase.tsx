@@ -5,7 +5,7 @@ import {LevelColumn} from './columns/Level';
 import {NameColumn} from './columns/Name';
 import {SetnamesColumn} from './columns/Setnames';
 import {RaceColumn} from './columns/Race';
-import {CardProvider, TargetCardProvider} from './context';
+import {CardContext, TargetCardContext} from './context';
 import {AttributeColumn} from './columns/Attribute';
 import {CardTypeColumn} from './columns/CardType';
 import {CategoryColumn} from './columns/Category';
@@ -17,7 +17,7 @@ export default function ShowCase({target, items}: {target: Card; items: Card[]})
     }
 
     return (
-        <TargetCardProvider value={target}>
+        <TargetCardContext value={target}>
             <Table>
                 <TableHeader>
                     <TableRow>
@@ -34,7 +34,7 @@ export default function ShowCase({target, items}: {target: Card; items: Card[]})
                 </TableHeader>
                 <TableBody>
                     {items.map(monster => (
-                        <CardProvider value={monster} key={monster.id}>
+                        <CardContext value={monster} key={monster.id}>
                             <TableRow>
                                 <TableCell>
                                     <NameColumn />
@@ -64,10 +64,10 @@ export default function ShowCase({target, items}: {target: Card; items: Card[]})
                                     <CategoryColumn />
                                 </TableCell>
                             </TableRow>
-                        </CardProvider>
+                        </CardContext>
                     ))}
                 </TableBody>
             </Table>
-        </TargetCardProvider>
+        </TargetCardContext>
     );
 }

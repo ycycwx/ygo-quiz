@@ -1,23 +1,25 @@
-#/bin/sh
+#!/bin/sh
+set -eu
 
 ROOT_DIR=$(git rev-parse --show-toplevel)
-PATH_DIR=$ROOT_DIR/public/db/
+DB_DIR="$ROOT_DIR/public/db"
+CACHE_DIR="$ROOT_DIR/.cache/ygopro-database"
 
-if [ ! -d $PATH_DIR ]; then
-    mkdir -p $PATH_DIR
+mkdir -p "$DB_DIR" "$ROOT_DIR/.cache"
+
+if [ ! -d "$CACHE_DIR/.git" ]; then
+  git clone --depth 1 https://github.com/mycard/ygopro-database.git "$CACHE_DIR" || {
+    echo "Failed to clone ygopro-database" >&2
+    exit 1
+  }
+else
+  git -C "$CACHE_DIR" pull --ff-only || {
+    echo "Failed to update ygopro-database" >&2
+    exit 1
+  }
 fi
 
-# TODO: Check hash of the files to see if they are up to date
-# Remove old files
-rm $PATH_DIR/*
+cp "$CACHE_DIR/locales/zh-CN/cards.cdb" "$DB_DIR/cards.cdb"
+cp "$CACHE_DIR/locales/zh-CN/strings.conf" "$DB_DIR/strings.conf"
 
-echo "Start downloading database files"
-# Download the latest database files
-wget -P $PATH_DIR https://raw.githubusercontent.com/mycard/ygopro-database/master/locales/zh-CN/cards.cdb
-wget -P $PATH_DIR https://raw.githubusercontent.com/mycard/ygopro-database/master/locales/zh-CN/strings.conf
-echo "Download database files done"
-
-# Download hot cards
-echo "Start downloading hot cards"
-bun run $ROOT_DIR/scripts/top.ts
-echo "Download hot cards done"
+bun run "$ROOT_DIR/scripts/top.ts"
